@@ -1,0 +1,107 @@
+﻿@*@model IEnumerable<HoiThao_Core.Data.Account>*@
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+
+@model IPagedList<HoiThao_Core.Data.Account>
+
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+@section Scripts{
+    <script src="~/lib/bootbox/dist/bootbox.min.js"></script>
+    <script src="~/js/Admin/Acount/accountController.js"></script>
+}
+
+<form asp-action="Index" method="get">
+    <div class="row">
+        <div class="col-md-4">
+            <input type="text" placeholder="Find by name" class="form-control" name="SearchString" value="@ViewData["currentFilter"]" />
+        </div>
+
+        <div class="col-md-2 float-right btn-group">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-search-dollar"></i></button>
+            @*<a asp-action="Index">Back to Full List</a>*@
+            <a asp-action="Create" class="btn btn-success"><i class="fa fa-plus-circle"></i></a>
+        </div>
+    </div>
+</form>
+
+<hr />
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                Username
+            </th>
+            <th>
+                Họ tên
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+            <th>
+                Trạng thái
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            string status = item.Trangthai.ToString();
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Hoten)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ngaytao)
+                </td>
+                <td>
+                    @if (item.Trangthai)
+                    {
+                        <span class="badge badge-success">true</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-warning">false</span>
+                    }
+                </td>
+
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-info" asp-area="" asp-controller="Accounts" asp-action="Update" asp-route-id="@item.Id"><i class="fa fa-edit"></i></a>
+                        @*<a class="btn btn-danger" asp-area="" asp-controller="Acounts" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-alt"></i></a>*@
+                        @Html.ActionLink("Xoa", "Delete", "Accounts", new { id = item.Id }, new { @class = "btn btn-danger btn-delete" })
+
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@using X.PagedList.Mvc.Common
+<!-- output a paging control that lets the user navigation to the previous page, next page, etc -->
+@*@Html.PagedListPager((IPagedList)ViewBag.Accounts, page => Url.Action("List", new { page, searchString = @ViewData["currentFilter"] }), new X.PagedList.Mvc.Common.PagedListRenderOptionsBase { LiElementClasses = new string[] { "page-item" }, PageClasses = new string[] { "page-link" }})*@
+
+@*@Html.PagedListPager((IPagedList)ViewBag.Accounts, page => Url.Action("List", new { page, searchString = @ViewData["currentFilter"] }), new X.PagedList.Mvc.Common.PagedListRenderOptionsBase {
+        LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" },
+        DisplayLinkToFirstPage = X.PagedList.Mvc.Common.PagedListDisplayMode.Never,
+        DisplayLinkToLastPage = X.PagedList.Mvc.Common.PagedListDisplayMode.Never,
+        DisplayLinkToPreviousPage = X.PagedList.Mvc.Common.PagedListDisplayMode.Always,
+        DisplayLinkToNextPage = X.PagedList.Mvc.Common.PagedListDisplayMode.Always,
+        MaximumPageNumbersToDisplay = 3
+    })*@
+
+@Html.PagedListPager((IPagedList)ViewBag.Accounts, page => Url.Action("List", new { page, searchString = @ViewData["currentFilter"] }),
+    PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions { LiElementClasses = new string[] { "page-item" },
+        PageClasses = new string[] { "page-link" }, MaximumPageNumbersToDisplay = 5, UlElementClasses = new[] { "pagination" },
+        ContainerDivClasses = new[] { "pagination-container" } }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "nameListContainer" }))
+
+
+@*DisplayPageCountAndCurrentLocation = true ,*@ 
