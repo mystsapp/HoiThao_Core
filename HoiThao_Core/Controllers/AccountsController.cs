@@ -63,8 +63,10 @@ namespace HoiThao_Core.Controllers
                 return View(account);
             }
 
-            //var accountM = _accountRepository.GetById(account.Id);
+            var accountM = _accountRepository.GetById(account.Id);
 
+            if (string.IsNullOrEmpty(account.Password))
+                account.Password = accountM.Password;
 
             account.Ngaycapnhat = DateTime.Now;
             
