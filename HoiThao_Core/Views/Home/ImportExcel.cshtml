@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Import Excel";
+}
+
+@section Scripts{
+    <script src="~/js/Admin/Home/ImportExcelController.js"></script>
+}
+
+<h1>Import Excel</h1>
+<form method="post" enctype="multipart/form-data">
+
+    <div class="input-group mb-3 col-md-6">
+        <input type="file" class="form-control" id="fUpload" name="files" >
+        <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="btnUpload">Upload</button>
+        </div>
+    </div>
+    <br />
+    <div id="dvData"></div>
+</form>
+<h1>Download Excel</h1>
+<div class="form-group">
+    <div class="control-label col-md-2">Download Format:</div>
+    <div class="col-md-10">
+        <a asp-controller="Home" asp-action="DownloadExcel"><img src="~/Image/Excel.ico" width="25" height="25" title="Download Excel format" alt="excel" /></a>
+    </div>
+</div>

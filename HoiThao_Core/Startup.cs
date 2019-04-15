@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using HoiThao_Core.Data;
@@ -11,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 
 namespace HoiThao_Core
 {
@@ -38,6 +40,11 @@ namespace HoiThao_Core
 
 
             services.AddTransient<IAccountRepository, AccountRepository>();
+            services.AddTransient<IAseanRepository, AseanRepository>();
+
+            //services.AddSingleton<IFileProvider>(
+            //new PhysicalFileProvider(
+            //    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
