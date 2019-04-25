@@ -1,32 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using HoiThao_Core.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System.Text;
-using System.Data;
-using System.Data.SqlClient;
-using OfficeOpenXml;
-using NPOI.SS.UserModel;
-using NPOI.HSSF.UserModel;
-using NPOI.XSSF.UserModel;
-using Microsoft.Extensions.Configuration;
-using HoiThao_Core.Helpers;
-using Microsoft.Extensions.DependencyInjection;
-using HoiThao_Core.Data;
+﻿using HoiThao_Core.Data;
 using HoiThao_Core.Data.Repository;
+using HoiThao_Core.Helpers;
+using HoiThao_Core.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using OfficeOpenXml;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace HoiThao_Core.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        
-
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IAseanRepository _aseanRepository;
 
@@ -35,14 +27,86 @@ namespace HoiThao_Core.Controllers
             _hostingEnvironment = hostingEnvironment;
             _aseanRepository = aseanRepository;
         }
-        public IActionResult Index()
+
+        private List<OptionListVM> OptionList()
         {
+            return new List<OptionListVM>()
+            {
+                new OptionListVM(){Name = "All", Value = ""},
+                new OptionListVM(){Name = "Invited", Value = "true"},
+                new OptionListVM(){Name = "Speaker", Value = "false"}
+            };
+        }
+
+        public IActionResult Index(string option, string searchString, int page = 1)
+        {
+            ViewData["CurrentFilter"] = searchString;
+            ViewBag.optionFilter = option;
+
+            TempData["optionFilter"] = OptionList();
+
+            var aseans = _aseanRepository.GetAseans(option, searchString, page);
+
+            ViewBag.Aseans = aseans;
+
+            return View(aseans);
+        }
+
+        public IActionResult Create()
+        {
+            ViewBag.optionFilter = new List<OptionListVM>()
+            {
+                new OptionListVM(){Name = "-- Selec one --", Value = ""},
+                new OptionListVM(){Name = "True", Value = "true"},
+                new OptionListVM(){Name = "False", Value = "false"}
+            };
+
             return View();
         }
 
-        public IActionResult Privacy()
+        [HttpPost]
+        public IActionResult Create(Asean asean)
         {
-            return View();
+            try
+            {
+                _aseanRepository.Create(asean);
+                SetAlert("Create success.", "success");
+            }
+            catch (Exception)
+            {
+                SetAlert("Create success.", "warning");
+                throw;
+            }
+            
+            return Redirect("Index");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var asean = _aseanRepository.GetById(id);
+            return View(asean);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCheckin(int id)
+        {
+            var asean = _aseanRepository.GetById(id);
+            asean.Checkin = DateTime.Now;
+            try
+            {
+                _aseanRepository.Update(asean);
+                SetAlert("Checkin success.", "success");
+            }
+            catch (Exception)
+            {
+                SetAlert("Checkin success.", "warning");
+                throw;
+            }
+
+            return Json(new
+            {
+                status = true
+            });
         }
 
         public IActionResult ImportExcel()
@@ -88,7 +152,6 @@ namespace HoiThao_Core.Controllers
                 {
                     file.CopyTo(stream);
                 }
-               
 
                 using (ExcelPackage package = new ExcelPackage(fileInfo))
                 {
@@ -99,7 +162,6 @@ namespace HoiThao_Core.Controllers
 
                     for (int i = 2; i <= totalRows; i++)
                     {
-
                         var asean = new Asean();
 
                         if (workSheet.Cells[i, 2].Value != null)
@@ -160,7 +222,6 @@ namespace HoiThao_Core.Controllers
                             asean.Dt = workSheet.Cells[i, 26].Value.ToString();
 
                         aseanList.Add(asean);
-
                     }
 
                     //_db.Customers.AddRange(customerList);
@@ -168,14 +229,11 @@ namespace HoiThao_Core.Controllers
                     try
                     {
                         _aseanRepository.AddList(aseanList);
-
                     }
                     catch (Exception ex)
                     {
-
                         throw ex;
                     }
-
                 }
             }
             if (System.IO.File.Exists(fileInfo.ToString()))
@@ -208,17 +266,16 @@ namespace HoiThao_Core.Controllers
                 {
                     file.CopyTo(stream);
 
-
                     stream.Position = 0;
                     if (sFileExtension == ".xls")
                     {
-                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook  
+                        HSSFWorkbook hssfwb = new HSSFWorkbook(stream); //This will read the Excel 97-2000 formats
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook
                     }
                     else
                     {
-                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format  
-                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook   
+                        XSSFWorkbook hssfwb = new XSSFWorkbook(stream); //This will read 2007 Excel format
+                        sheet = hssfwb.GetSheetAt(0); //get first sheet from workbook
                     }
                     IRow headerRow = sheet.GetRow(0); //Get Header Row
                     int cellCount = headerRow.LastCellNum;
@@ -245,7 +302,6 @@ namespace HoiThao_Core.Controllers
                         sb.AppendLine("</tr>");
                     }
                     sb.Append("</table>");
-
                 }
             }
 
@@ -253,11 +309,5 @@ namespace HoiThao_Core.Controllers
 
             return this.Content(sb.ToString());
         }
-       
-
     }
-
-
 }
-
-

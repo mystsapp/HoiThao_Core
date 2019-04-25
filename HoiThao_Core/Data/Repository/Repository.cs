@@ -46,7 +46,8 @@ namespace HoiThao_Core.Data.Repository
 
         public T GetById(int id)
         {
-            return _context.Set<T>().Find(id);
+            var k = Convert.ToDecimal(id);
+            return _context.Set<T>().Find(k);
         }
 
         public void Update(T entity)

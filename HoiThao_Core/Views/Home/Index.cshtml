@@ -1,8 +1,221 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@*@model IEnumerable<HoiThao_Core.Data.Asean>*@
+@using X.PagedList.Mvc.Core; @*import this so we get our HTML Helper*@
+@using X.PagedList; @*import this so we can cast our list to IPagedList (only necessary because ViewBag is dynamic)*@
+
+@model IPagedList<HoiThao_Core.Data.Asean>
+
+@{
+    ViewData["Title"] = "Asean";
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@section Scripts{
+    <script src="~/lib/bootbox/dist/bootbox.all.min.js"></script>
+    <script src="~/js/Admin/Home/homeController.js"></script>
+    <style>
+        .tblAsean .cursor-pointer:hover {
+            background-color: #3E5C9A;
+            cursor: pointer;
+        }
+
+        .hoverClass {
+            background-color: #3E5C9A;
+        }
+    </style>
+}
+
+<form id="frmSearch" asp-action="Index" method="get">
+    <div class="row">
+        <div class="col-md-3">
+
+            @Html.DropDownList("option",
+                                new SelectList((List<OptionListVM>)TempData["optionFilter"], "Value", "Name"),
+                                htmlAttributes: new { @class = "form-control border-input", @id = "ddlStatusS" })
+
+        </div>
+
+        <div class="input-group mb-3 col-md-6">
+            @*<div class="col-md-4">*@
+            <input type="text" id="txtNameS" placeholder="Find by name, Id" class="form-control" name="SearchString" value="@ViewData["currentFilter"]" />
+            @*</div>*@
+
+            <div class="input-group-append">
+                <button type="button" id="btnSearch" class="btn btn-primary"><i class="fa fa-search-dollar"></i></button>
+                <a asp-action="Create" id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-circle"></i></a>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<form asp-action="" id="refresh">
+    <div class="row">
+        <div class="col-md-12" style="overflow:auto;">
+            <table class="table table-bordered table-hover text-center tblAsean">
+                <thead>
+                    <tr>
+                        <th width="170">#</th>
+                        <th width="100">Invited</th>
+                        <th width="100">Speaker</th>
+                        <th width="50">ID</th>
+                        <th width="80">Title</th>
+                        <th width="150">First name</th>
+                        <th width="100">Last name</th>
+                        <th width="180">Company</th>
+                        <th width="180">Email</th>
+                        <th width="150">Phone</th>
+                        <th width="100">Country</th>
+                        <th width="100">Payment date</th>
+                        <th width="100">Amount</th>
+                        <th width="50">Banking fee</th>
+                        <th width="250">Mode of payment</th>
+                        <th width="100">Cart number</th>
+                        <th width="80">Currency</th>
+                        <th width="100">Rate</th>
+                        <th width="100">Grand total</th>
+                        <th width="190">Check in</th>
+                        <th width="150">Description</th>
+                        <th width="150">Bill VAT number</th>
+                        <th width="150">Tax code</th>
+                        <th width="150">Fax</th>
+                        <th width="150">Registration date</th>
+                        <th width="50">Total A</th>
+                        <th width="50">Total B</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        string payment = "";
+                        if (item.Payment == "PAID")
+                        {
+                            payment = "alert alert-success";
+                        }
+                        else
+                        {
+                            payment = "alert alert-danger";
+                        }
+                        <tr class="paymentTr cursor-pointer">
+
+                            <td>
+                                <div class="btn-group">
+                                    <a class="btn btn-outline btn-primary btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.K" title="Edit"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-outline btn-danger btn-sm btn-delete" asp-action="Delete" asp-route-id="@item.K" title="Delete"><i class="fa fa-trash"></i></a>@*<i class="fa fa-trash" aria-hidden="true"></i>*@
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintReceipt" asp-action="PrintReceipt" asp-route-id="@item.K" title="Print receipt"><i class="fas fa-receipt"></i></a>
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintVAT" asp-action="PrintVAT" asp-route-id="@item.K" title="Print VAT"><i class="fas fa-print"></i></a>
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintBadge" asp-action="PrintBadge" asp-route-id="@item.K" title="Print Badge"><i class="fas fa-id-badge"></i></a>
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintCertificate" asp-action="PrintCertificate" asp-route-id="@item.K" title="Print Certificate"><i class="fas fa-address-card"></i></a>
+                                </div>
+                            </td>
+
+                            <td>
+                                @if (item.Invited.HasValue.Equals(true))
+                                {
+                                    <span class="badge badge-success">true</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning">false</span>
+                                }
+                            </td>
+                            <td>
+                                @if (item.Speaker.HasValue.Equals(true))
+                                {
+                                    <span class="badge badge-success">true</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-warning">false</span>
+                                }
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td class="@payment">
+                                @Html.DisplayFor(modelItem => item.Firstname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Lastname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Tel)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Country)
+                            </td>
+                            <td class="payment">
+                                @Html.DisplayFor(modelItem => item.Payment)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Amount)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Bankfee)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Mop)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cardnumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Currency)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Rate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grandtotal)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Checkin)
+                                <input class="form-control txtCheckin" data-kId="@item.K" type="text" value="@item.Checkin" />
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Descript)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Vatbill)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Taxcode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Fax)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Dangky)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Totala)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Totalb)
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @using X.PagedList.Mvc.Common
+
+            @Html.PagedListPager((IPagedList)ViewBag.Aseans, page => Url.Action("Index", new { page, option = Context.Request.Query["option"], searchString = @ViewData["currentFilter"] }),
+                PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new PagedListRenderOptions { LiElementClasses = new string[] { "page-item" },
+                    PageClasses = new string[] { "page-link" }, MaximumPageNumbersToDisplay = 5, UlElementClasses = new[] { "pagination" },
+                    ContainerDivClasses = new[] { "pagination-container" } }, new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "nameListContainer" }))
+
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,171 @@
+﻿<!-- Modal -->
+<div id="modalAddUpdate" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/update item</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmSaveData" asp-controller="Home" asp-action="">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label>Invited:</label>
+                            <input type="checkbox" id="ckInvited">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Speaker:</label>
+                            <input type="checkbox" id="ckSpeaker">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtId">ID:</label>
+                            <input type="text" class="form-control" name="id" id="txtId">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtTitle">Title:</label>
+                            <input type="text" class="form-control" name="title" id="txtTitle">
+                        </div>
+                        <input type="hidden" id="hidID" value="" />
+
+                        <div class="form-group col-md-3">
+                            <label for="txtFirstname">Firstname:</label>
+                            <input type="text" class="form-control" name="firstname" id="txtFirstname">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtLastname">Lastname:</label>
+                            <input type="text" class="form-control" name="lastname" id="txtLastname">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtCompany">Company:</label>
+                            <input type="text" class="form-control" name="company" id="txtCompany">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtEmail">Email:</label>
+                            <input type="text" class="form-control" name="email" id="txtEmail">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtPhone">Phone:</label>
+                            <input type="tel" class="form-control" name="phone" id="txtPhone">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtCountry">Country:</label>
+                            <input type="text" class="form-control" name="country" id="txtCountry">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtPayment">Payment:</label>
+                            <input type="text" class="form-control" name="payment" id="txtPayment">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtAmount">Amount:</label>
+                            <input type="number" class="form-control" name="amount" id="txtAmount">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtBankfee">Bankfee:</label>
+                            <input type="number" class="form-control" name="country" id="txtBankfee">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtMop">Mode of payment:</label>
+                            <input type="text" class="form-control" name="mop" id="txtMop">
+                        </div>
+
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtCartnumber">Cart number:</label>
+                            <input type="number" class="form-control" name="cartnumber" id="txtCartnumber">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtCurrency">Currency:</label>
+                            <input type="text" class="form-control" name="currency" id="txtCurrency">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtRate">Rate:</label>
+                            <input type="number" class="form-control" name="rate" id="txtRate">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtGrandtotal">Grand total:</label>
+                            <input type="number" class="form-control" name="grandTotal" id="txtGrandtotal">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtCheckin">Checkin:</label>
+                            <input type="text" class="form-control" name="checkin" id="txtCheckin">
+                            <input type="hidden" class="form-control" name="checkinHid" id="txtCheckinHid">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtDescript">Description:</label>
+                            <textarea type="text" class="form-control" name="descript" id="txtDescript" ></textarea>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtVatBill">Bill VAT:</label>
+                            <input type="text" class="form-control" name="vatBill" id="txtVatBill">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtTaxCode">Tax code:</label>
+                            <input type="text" class="form-control" name="taxCode" id="txtTaxCode">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtFax">Fax:</label>
+                            <input type="text" class="form-control" name="fax" id="txtFax">
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label for="txtDangky">Registration:</label>
+                            <input type="text" class="form-control" name="dangKy" id="txtDangky">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtTotala">Total a:</label>
+                            <input type="number" class="form-control" name="totala" id="txtTotala">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label for="txtTotala">Totalb:</label>
+                            <input type="number" class="form-control" name="totalb" id="txtTotalb">
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <input type="hidden" class="form-control" name="ngaytao" id="txtNgayTao">
+                        <input type="hidden" class="form-control" name="ngaycapnhat" id="txtNgayCapNhat">
+                        <input type="hidden" class="form-control" name="hidPass" id="txtHidPass">
+                        <input type="hidden" class="form-control" name="hidPass" id="txtHidID">
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSave"><i class="fa fa-save"></i> Lưu</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-power-off"></i></button>
+            </div>
+        </div>
+
+    </div>
+</div>
