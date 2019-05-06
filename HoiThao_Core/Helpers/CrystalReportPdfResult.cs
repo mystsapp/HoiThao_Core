@@ -1,11 +1,4 @@
-﻿using CrystalDecisions.CrystalReports.Engine;
-using CrystalDecisions.Shared;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace HoiThao_Core.Helpers
 {
@@ -23,7 +16,6 @@ namespace HoiThao_Core.Helpers
 
         //public override void ExecuteResult(ControllerContext context)
         //{
-
         //    var response = context.HttpContext.ApplicationInstance.Response;
         //    response.Clear();
         //    response.Buffer = false;

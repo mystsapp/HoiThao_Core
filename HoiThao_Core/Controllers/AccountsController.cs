@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using HoiThao_Core.Data;
-using HoiThao_Core.Data.Repository;
-
+﻿using Data;
+using Data.Repository;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace HoiThao_Core.Controllers
 {
@@ -23,7 +19,7 @@ namespace HoiThao_Core.Controllers
         {
             ViewData["CurrentFilter"] = searchString;
 
-           var accounts = _accountRepository.GetAccounts(searchString, page);
+            var accounts = _accountRepository.GetAccounts(searchString, page);
 
             ViewBag.Accounts = accounts;
 
@@ -69,7 +65,7 @@ namespace HoiThao_Core.Controllers
                 account.Password = accountM.Password;
 
             account.Ngaycapnhat = DateTime.Now;
-            
+
             _accountRepository.Update(account);
 
             return RedirectToAction("List");

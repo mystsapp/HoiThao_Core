@@ -1,10 +1,9 @@
-﻿using HoiThao_Core.Data.Interfaces;
+﻿using Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace HoiThao_Core.Data.Repository
+namespace Data.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
@@ -54,7 +53,6 @@ namespace HoiThao_Core.Data.Repository
         {
             _context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Save();
-
         }
     }
 }

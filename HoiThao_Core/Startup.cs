@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Data;
+using Data.Repository;
 using DinkToPdf;
 using DinkToPdf.Contracts;
-using HoiThao_Core.Data;
-using HoiThao_Core.Data.Repository;
 using HoiThao_Core.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace HoiThao_Core
 {

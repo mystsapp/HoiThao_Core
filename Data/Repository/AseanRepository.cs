@@ -1,15 +1,14 @@
-﻿using HoiThao_Core.Data.Interfaces;
-using System;
+﻿using Data.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
-namespace HoiThao_Core.Data.Repository
+namespace Data.Repository
 {
     public interface IAseanRepository : IRepository<Asean>
     {
         void AddList(List<Asean> aseans);
+
         IPagedList<Asean> GetAseans(string option, string searchString, int? page);
     }
 
@@ -17,7 +16,6 @@ namespace HoiThao_Core.Data.Repository
     {
         public AseanRepository(hoinghiContext context) : base(context)
         {
-
         }
 
         public void AddList(List<Asean> aseans)
@@ -34,7 +32,7 @@ namespace HoiThao_Core.Data.Repository
 
             // retrieve list from database/whereverand
             var list = _context.Aseans.AsQueryable();
-           
+
             if (!string.IsNullOrEmpty(option))
             {
                 bool statusBool = bool.Parse(option);
@@ -50,7 +48,6 @@ namespace HoiThao_Core.Data.Repository
                     list = _context.Aseans.Where(i => i.Speaker == true).AsQueryable();
                 }
             }
-            
 
             if (!string.IsNullOrEmpty(searchString))
                 list = list.Where(a => a.Firstname.Contains(searchString) || a.Id.Contains(searchString));

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace HoiThao_Core.Data
+namespace Data
 {
     public partial class Asean
     {

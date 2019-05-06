@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HoiThao_Core.Helpers
 {
@@ -38,7 +37,6 @@ namespace HoiThao_Core.Helpers
 
                     dataTable.Rows.Add(dataRow);
                 }
-
             }
             dataTable.Rows.RemoveAt(0);
 
@@ -63,7 +61,6 @@ namespace HoiThao_Core.Helpers
         public static DataTable READExcel(string path)
 
         {
-
             //Instance reference for Excel Application
 
             Microsoft.Office.Interop.Excel.Application objXL = null;
@@ -77,7 +74,6 @@ namespace HoiThao_Core.Helpers
             try
 
             {
-
                 //Instancing Excel using COM services
 
                 objXL = new Microsoft.Office.Interop.Excel.Application();
@@ -86,12 +82,9 @@ namespace HoiThao_Core.Helpers
 
                 objWB = objXL.Workbooks.Open(path);
 
-
-
                 foreach (Microsoft.Office.Interop.Excel.Worksheet objSHT in objWB.Worksheets)
 
                 {
-
                     int rows = objSHT.UsedRange.Rows.Count;
 
                     int cols = objSHT.UsedRange.Columns.Count;
@@ -100,8 +93,6 @@ namespace HoiThao_Core.Helpers
 
                     int noofrow = 1;
 
-
-
                     //If 1st Row Contains unique Headers for datatable include this part else remove it
 
                     //Start
@@ -109,44 +100,31 @@ namespace HoiThao_Core.Helpers
                     for (int c = 1; c <= cols; c++)
 
                     {
-
                         string colname = objSHT.Cells[1, c].ToString();
 
                         dt.Columns.Add(colname);
 
                         noofrow = 2;
-
                     }
 
                     //END
 
-
-
                     for (int r = noofrow; r <= rows; r++)
 
                     {
-
                         DataRow dr = dt.NewRow();
 
                         for (int c = 1; c <= cols; c++)
 
                         {
-
                             dr[c - 1] = objSHT.Cells[r, c].ToString();
-
                         }
 
                         dt.Rows.Add(dr);
-
                     }
 
                     ds.Tables.Add(dt);
-
-
-
                 }
-
-
 
                 //Closing workbook
 
@@ -155,11 +133,7 @@ namespace HoiThao_Core.Helpers
                 //Closing excel application
 
                 objXL.Quit();
-
-
-
             }
-
             catch (Exception ex)
 
             {
@@ -175,11 +149,9 @@ namespace HoiThao_Core.Helpers
                 objXL.Quit();
 
                 //Response.Write("Illegal permission");
-
             }
 
             return ds.Tables["abc"];
-
         }
     }
 }

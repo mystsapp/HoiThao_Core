@@ -1,9 +1,6 @@
 ﻿using HtmlAgilityPack;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace HoiThao_Core.Helpers
 {
@@ -17,7 +14,7 @@ namespace HoiThao_Core.Helpers
             DataTable table = new DataTable();
             foreach (HtmlNode header in headers)
                 table.Columns.Add(header.InnerText); // create columns from th
-                                                     // select rows with td elements 
+                                                     // select rows with td elements
             foreach (var row in doc.DocumentNode.SelectNodes("//tr[td]"))
                 table.Rows.Add(row.SelectNodes("td").Select(td => td.InnerText).ToArray());
 

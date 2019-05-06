@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HoiThao_Core.Data
+namespace Data
 {
     public partial class Account
     {

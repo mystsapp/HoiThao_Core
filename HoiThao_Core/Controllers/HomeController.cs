@@ -1,5 +1,7 @@
-﻿using HoiThao_Core.Data;
-using HoiThao_Core.Data.Repository;
+﻿using Data;
+using Data.Repository;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using HoiThao_Core.Helpers;
 using HoiThao_Core.Models;
 using Microsoft.AspNetCore.Hosting;
@@ -14,11 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
-using Microsoft.AspNetCore;
-using DinkToPdf.Contracts;
-using DinkToPdf;
 
 namespace HoiThao_Core.Controllers
 {
@@ -26,7 +24,6 @@ namespace HoiThao_Core.Controllers
 
     public class HomeController : BaseController
     {
-
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IAseanRepository _aseanRepository;
         private readonly IConverter _converter;
@@ -47,6 +44,7 @@ namespace HoiThao_Core.Controllers
                 new OptionListVM(){Name = "Speaker", Value = "false"}
             };
         }
+
         private List<OptionListVM> OptionEditList()
         {
             return new List<OptionListVM>()
@@ -88,7 +86,6 @@ namespace HoiThao_Core.Controllers
         [HttpPost]
         public IActionResult Create(Asean asean, string request1)
         {
-            
             try
             {
                 _aseanRepository.Create(asean);
@@ -375,7 +372,7 @@ namespace HoiThao_Core.Controllers
         public ActionResult PrintReceipt(int id)
         {
             var aseanM = _aseanRepository.GetById(id);
-            
+
             //ViewBag.AmountToString = SoSangChu.DoiSoSangChu(aseanM.Amount.ToString());
             return View(aseanM);
         }
@@ -387,7 +384,7 @@ namespace HoiThao_Core.Controllers
             if (string.IsNullOrEmpty(str))
                 str = "0";
 
-           // ViewBag.AmountToString = SoSangChu.DoiSoSangChu(str);
+            // ViewBag.AmountToString = SoSangChu.DoiSoSangChu(str);
             return View(aseanM);
         }
 
@@ -402,7 +399,6 @@ namespace HoiThao_Core.Controllers
         [HttpGet]
         public IActionResult CreatePDF()
         {
-            
             var globalSettings = new GlobalSettings
             {
                 ColorMode = ColorMode.Color,
@@ -436,9 +432,7 @@ namespace HoiThao_Core.Controllers
 
             //return Ok("Successfully created PDF document.");
             //return File(file, "application/pdf", "EmployeeReport.pdf"); //USE THIS RETURN STATEMENT TO DOWNLOAD GENERATED PDF DOCUMENT
-           return File(file, "application/pdf");
-
+            return File(file, "application/pdf");
         }
-
     }
 }

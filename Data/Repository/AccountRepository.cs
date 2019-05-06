@@ -1,12 +1,8 @@
-﻿using HoiThao_Core.Data.Interfaces;
-using HoiThao_Core.Helpers;
-using System;
-using System.Collections.Generic;
+﻿using Data.Interfaces;
 using System.Linq;
-using System.Threading.Tasks;
 using X.PagedList;
 
-namespace HoiThao_Core.Data.Repository
+namespace Data.Repository
 {
     public interface IAccountRepository : IRepository<Account>
     {
@@ -17,7 +13,6 @@ namespace HoiThao_Core.Data.Repository
     {
         public AccountRepository(hoinghiContext context) : base(context)
         {
-
         }
 
         public IPagedList<Account> GetAccounts(string searchString, int? page)
