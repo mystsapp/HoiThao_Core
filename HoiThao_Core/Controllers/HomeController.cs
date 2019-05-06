@@ -4,6 +4,7 @@ using HoiThao_Core.Helpers;
 using HoiThao_Core.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -13,19 +14,28 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using Microsoft.AspNetCore;
+using DinkToPdf.Contracts;
+using DinkToPdf;
 
 namespace HoiThao_Core.Controllers
 {
+    //    public abstract Microsoft.AspNetCore.Http.QueryString QueryString { get; set; }
+
     public class HomeController : BaseController
     {
+
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly IAseanRepository _aseanRepository;
+        private readonly IConverter _converter;
 
-        public HomeController(IHostingEnvironment hostingEnvironment, IAseanRepository aseanRepository)
+        public HomeController(IHostingEnvironment hostingEnvironment, IAseanRepository aseanRepository, IConverter converter)
         {
             _hostingEnvironment = hostingEnvironment;
             _aseanRepository = aseanRepository;
+            _converter = converter;
         }
 
         private List<OptionListVM> OptionList()
@@ -37,9 +47,22 @@ namespace HoiThao_Core.Controllers
                 new OptionListVM(){Name = "Speaker", Value = "false"}
             };
         }
+        private List<OptionListVM> OptionEditList()
+        {
+            return new List<OptionListVM>()
+            {
+                new OptionListVM(){Name = "-- Selec one --", Value = ""},
+                new OptionListVM(){Name = "True", Value = "true"},
+                new OptionListVM(){Name = "False", Value = "false"}
+            };
+        }
 
         public IActionResult Index(string option, string searchString, int page = 1)
         {
+            //string baseUrl = string.Format("{0}://{1}{2}{3}", Request.Scheme, Request.Host, Request.PathBase, Request.QueryString);
+            ViewBag.request = UriHelper.GetDisplayUrl(Request);
+
+            ViewData["abc"] = UriHelper.GetDisplayUrl(Request);
             ViewData["CurrentFilter"] = searchString;
             ViewBag.optionFilter = option;
 
@@ -52,21 +75,20 @@ namespace HoiThao_Core.Controllers
             return View(aseans);
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string request)
         {
-            ViewBag.optionFilter = new List<OptionListVM>()
-            {
-                new OptionListVM(){Name = "-- Selec one --", Value = ""},
-                new OptionListVM(){Name = "True", Value = "true"},
-                new OptionListVM(){Name = "False", Value = "false"}
-            };
+            ViewBag.request1 = request;
+            var a = ViewData["abc"];
+
+            ViewBag.optionFilter = OptionEditList();
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Asean asean)
+        public IActionResult Create(Asean asean, string request1)
         {
+            
             try
             {
                 _aseanRepository.Create(asean);
@@ -77,14 +99,54 @@ namespace HoiThao_Core.Controllers
                 SetAlert("Create success.", "warning");
                 throw;
             }
-            
-            return Redirect("Index");
+
+            return Redirect(request1);
         }
 
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int id, string request)
+        {
+            ViewBag.request1 = request;
+            var asean = _aseanRepository.GetById(id);
+
+            var editAseanVM = new EditAseanVM()
+            {
+                Asean = asean,
+                OptionListVM = OptionEditList()
+            };
+            return View(editAseanVM);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EditAseanVM editAseanVM, string request1)
+        {
+            if (ModelState.IsValid)
+            {
+                _aseanRepository.Update(editAseanVM.Asean);
+            }
+
+            return Redirect(request1);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(int id)
         {
             var asean = _aseanRepository.GetById(id);
-            return View(asean);
+            try
+            {
+                _aseanRepository.Delete(asean);
+                return Json(new
+                {
+                    status = true
+                });
+            }
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    status = false
+                });
+                throw;
+            }
         }
 
         [HttpPost]
@@ -309,5 +371,74 @@ namespace HoiThao_Core.Controllers
 
             return this.Content(sb.ToString());
         }
+
+        public ActionResult PrintReceipt(int id)
+        {
+            var aseanM = _aseanRepository.GetById(id);
+            
+            //ViewBag.AmountToString = SoSangChu.DoiSoSangChu(aseanM.Amount.ToString());
+            return View(aseanM);
+        }
+
+        public ActionResult PrintVAT(int aseanId)
+        {
+            var aseanM = _aseanRepository.GetById(aseanId);
+            string str = aseanM.Amount.ToString();
+            if (string.IsNullOrEmpty(str))
+                str = "0";
+
+           // ViewBag.AmountToString = SoSangChu.DoiSoSangChu(str);
+            return View(aseanM);
+        }
+
+        public IActionResult PrintBadge(int id)
+        {
+            ViewBag.link = UriHelper.GetDisplayUrl(Request);
+            var aseanList = _aseanRepository.GetById(id);
+
+            return View(aseanList);
+        }
+
+        [HttpGet]
+        public IActionResult CreatePDF()
+        {
+            
+            var globalSettings = new GlobalSettings
+            {
+                ColorMode = ColorMode.Color,
+                Orientation = Orientation.Portrait,
+                PaperSize = PaperKind.A4,
+                Margins = new MarginSettings { Top = 10 },
+                DocumentTitle = "PDF Report",
+                //Out = @"D:\PDFCreator\Employee_Report.pdf"  USE THIS PROPERTY TO SAVE PDF TO A PROVIDED LOCATION
+            };
+
+            var objectSettings = new ObjectSettings
+            {
+                PagesCount = true,
+                //HtmlContent = "<div>abc</div>",
+                //Page = link, //USE THIS PROPERTY TO GENERATE PDF CONTENT FROM AN HTML PAGE $"{this.Request.Scheme}://{this.Request.Host}/timeline/Reporting/Show/" + sercret + "/" + configId.ToString(),
+                Page = $"{this.Request.Scheme}://{this.Request.Host}",
+                WebSettings = { DefaultEncoding = "utf-8", UserStyleSheet = Path.Combine(Directory.GetCurrentDirectory(), "assets", "styles.css") },
+                HeaderSettings = { FontName = "Arial", FontSize = 9, Right = "Page [page] of [toPage]", Line = true },
+                FooterSettings = { FontName = "Arial", FontSize = 9, Line = true, Center = "Report Footer" }
+            };
+
+            var pdf = new HtmlToPdfDocument()
+            {
+                GlobalSettings = globalSettings,
+                Objects = { objectSettings }
+            };
+
+            //_converter.Convert(pdf); IF WE USE Out PROPERTY IN THE GlobalSettings CLASS, THIS IS ENOUGH FOR CONVERSION
+
+            var file = _converter.Convert(pdf);
+
+            //return Ok("Successfully created PDF document.");
+            //return File(file, "application/pdf", "EmployeeReport.pdf"); //USE THIS RETURN STATEMENT TO DOWNLOAD GENERATED PDF DOCUMENT
+           return File(file, "application/pdf");
+
+        }
+
     }
 }

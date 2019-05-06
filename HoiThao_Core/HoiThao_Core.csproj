@@ -8,6 +8,9 @@
 
 
   <ItemGroup>
+    <PackageReference Include="CrystalDecisions.CrystalReports.Engine" Version="1.0.0" />
+    <PackageReference Include="CrystalDecisions.Shared" Version="1.0.0" />
+    <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.9.1" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.1" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
@@ -16,18 +19,39 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
     <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <Folder Include="Reports\" />
+    <Folder Include="Views\Print\" />
     <Folder Include="wwwroot\excelfolder\" />
   </ItemGroup>
 
 
   <ItemGroup>
     <None Include="wwwroot\Image\Excel.ico" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\Helps\Helps.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="NumToWords">
+      <HintPath>F:\MS\ThuThuat\NumToWords.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Content Update="Views\Home\PrintBadge.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

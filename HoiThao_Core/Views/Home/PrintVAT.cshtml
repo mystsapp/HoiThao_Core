@@ -1,0 +1,146 @@
+﻿@model HoiThao_Core.Data.Asean
+
+@section Scripts{ 
+<script src="~/lib/jQuery.print/dist/jQuery.print.min.js"></script>
+<script src="~/js/Admin/Print/printController.js"></script>
+}
+
+<button type="button" id="btnPrintVAT" class="btn btn-primary">Print</button>
+
+<div id="printVAT">
+    <table>
+        <tr>
+
+            <td width="500px" >&nbsp;</td>
+            <td width="50%" >
+                @DateTime.Now.ToString("dd/MM/yyyy")
+            </td>
+        </tr>
+        <tr style="font-size:12px">
+            <td align="center">
+                <div>Saigontourist travel service</div>
+                <div>45 Le Thanh Ton St, Dist 1, HCMC, VIET NAM</div>
+                <div>(84 8) 8298914</div>
+            </td>
+            @*<td>Acc. Number (Foreign Currency): 007.137.008721.3</td>*@
+        </tr>
+        <tr>
+            @if (!string.IsNullOrEmpty(Model.Email))
+            {
+                <td>@Model.Email</td>
+            }
+            else
+            {
+                <td>no email.</td>
+            }
+            <td><br /><br /><br /></td>
+
+        </tr>
+
+        <tr>
+            <td align="center">
+                <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
+            </td>
+            <td align="left">
+                <div>@DateTime.Now.ToString("dd/MM/yyyy")</div>
+            </td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div>
+                    @if (@Model.Mop.Length > 9)
+                    {
+                        <div>@Model.Mop.Substring(0, 9)</div>
+
+                    }
+                    else
+                    {
+                        <div>@Model.Mop</div>
+                    }
+                </div>
+                <div>
+                    <span style="float:left">Currency: @Model.Currency VND</span>
+                    @if (!string.IsNullOrEmpty(Model.Dfno))
+                    {
+                        <span>Note: @Model.Dfno </span>
+                    }
+                    else
+                    {
+                        <span>Note: no note. </span>
+                    }
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><br /><br /><br /><br /></td>
+        </tr>
+
+        <tr>
+            <td align="center">
+                <span>PHÍ NGÂN HÀNG - BANKING FEE </span>
+            </td>
+            <td>
+                <table>
+                    <tr>
+                        <td align="left">
+                            <div>@Model.Amount</div>
+                            <div></div>
+                            <div>@Model.Bankfee</div>
+                        </td>
+                        <td align="right">
+                            <span style="float:left; width:170px;">bb</span><span style="width:170px; float:left;">aa</span>
+                            <div></div>
+                            <span>
+                                &nbsp;
+                            </span>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+                <br /><br />
+                <br />
+
+            </td>
+        </tr>
+        <tr>
+            <td align="right"></td>
+
+            <td align="left">
+                <div>cc</div><span style="float:right; width:170px; text-align:right">1bb</span>
+                <div></div>
+                <div>dd</div>
+
+                <div></div>
+                <span>
+                    &nbsp;
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                chu sang so aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                @ViewBag.AmountToString
+            </td>
+        </tr>
+    </table>
+
+</div>

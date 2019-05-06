@@ -1,0 +1,309 @@
+﻿@model HoiThao_Core.Data.Asean
+
+@section Scripts{
+    <script src="~/lib/jQuery.print/dist/jQuery.print.min.js"></script>
+    <script src="~/js/Admin/Print/printController.js"></script>
+}
+<style>
+    hr {
+        border-style: dashed;
+        border-width: thick;
+    }
+
+    table th {
+        font-size: 18px;
+        text-align: center;
+    }
+</style>
+
+<button type="button" id="btnPrint" class="btn btn-primary">Print</button>
+
+<div id="printReceipt">
+    <table>
+        <tr>
+            @*<td></td>*@
+            <th colspan="2">
+                <table>
+                    <tr>
+                        <td width="20%">
+                            <img src="~/Image/logo-color-big.png" alt="logo" />
+                        </td>
+                        <td width="80%">
+                            The 8th VIETNAM CONGRESS OF CONGENITAL AND STRUCTURAL HEART DISEASES
+                            C/0: CONGRESS CO-ORDINATOR - SAIGONTOURIST TRAVEL SERVICE Co.
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        <tr style="font-size:12px">
+            <td>45 Le Thanh Ton St, Dist 1, HCMC, VIET NAM</td>
+            <td>Acc. Number (Foreign Currency): 007.137.008721.3</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Telephone: (84 8) 38279279 - 38222650</td>
+            <td>Acc. Number (Local Currency): 007.100.001075.3</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Fiacsimile: (84 8) 38224987 - 38225516</td>
+            <td>Vietcombank Ho Chi Minh City Branch</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>E-mail: saigontourist@congenitalheartdisease.net.vn</td>
+            <td></td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Tax code: 03-10891532</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div style="font-weight:bolder; font-size:30px">
+                    BIÊN NHẬN - RECEIPT
+                </div>
+                <div style="font-weight:bold">
+                    Ngày (date): @DateTime.Now.ToString("dd/MM/yyy")
+                </div>
+            </td>
+            <td>Số (Registration No.): <b>@Model.Id</b></td>
+        </tr>
+        <tr>
+
+            <td colspan="2">
+                <span>Nhận của công ty (Company):</span>
+                <span>Khách lẽ (ONSITE)</span>
+            </td>
+        </tr>
+        <tr>
+            @*<td>Họ và tên: (Fullname)</td>
+                <td>@Model.firstname</td>*@
+            <td>
+
+                <span>Họ và tên (Full name): </span>
+                <span><b>@Model.Firstname</b></span>
+            </td>
+
+            <td>
+                <span>Số khách (Pax): </span>
+                @if (@Model.Mop.Length >= 14)
+                {
+                    <span>1 HTTT (MOP): @Model.Mop.Substring(0, 14)</span>
+                }
+                else
+                {
+                    <span>1 HTTT (MOP): @Model.Mop</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Số tiền (Amount): @Model.Amount
+            </td>
+            <td>
+                @*Loại tiền (Currency)*@
+                <table>
+                    <tr>
+                        <td>
+                            <span>Loại tiền (Currency):</span>
+                            <span>@Model.Currency abcd</span> -
+                        </td>
+                        <td>
+                            <span>Tỷ giá (Rate): </span>
+                            <span>@Model.Rate abcd</span>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Diễn giải: (Description): @Model.Descript
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Ghi chú (Note):@Model.Dfno</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Số tiền bằng chữ (Amount in word):&nbsp; <b>@ViewBag.AmountToString</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><b><i> (Xin vui lòng xuất trình biên nhận này khi thanh toán - please present this when setting the bill)</i></b></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td style="font-weight:bold" align="center" width="300px">
+                            <div>Khách hàng</div>
+                            <div>Clien's signature</div>
+                            <br /><br /><br /><br />
+                        </td>
+                        <td>
+                            <table>
+                                <tr style="font-weight:bold">
+                                    <td align="center" width="300px">
+                                        <div>Thâu ngân</div>
+                                        <div>Cashier</div>
+                                        <br /><br /><br /><br />
+                                    </td>
+                                    <td align="center" width="300px">
+                                        <div>Người lập</div>
+                                        <div>Issuer</div>
+                                        <br /><br /><br /><br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <table>
+        <tr>
+            @*<td></td>*@
+            <th colspan="2">
+                <table>
+                    <tr>
+                        <td width="20%">
+                            <img src="~/Image/logo-color-big.png" alt="logo" />
+                        </td>
+                        <td width="80%">
+                            The 8th VIETNAM CONGRESS OF CONGENITAL AND STRUCTURAL HEART DISEASES
+                            C/0: CONGRESS CO-ORDINATOR - SAIGONTOURIST TRAVEL SERVICE Co.
+                        </td>
+                    </tr>
+                </table>
+            </th>
+        </tr>
+        <tr style="font-size:12px">
+            <td>45 Le Thanh Ton St, Dist 1, HCMC, VIET NAM</td>
+            <td>Acc. Number (Foreign Currency): 007.137.008721.3</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Telephone: (84 8) 38279279 - 38222650</td>
+            <td>Acc. Number (Local Currency): 007.100.001075.3</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Fiacsimile: (84 8) 38224987 - 38225516</td>
+            <td>Vietcombank Ho Chi Minh City Branch</td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>E-mail: saigontourist@congenitalheartdisease.net.vn</td>
+            <td></td>
+        </tr>
+        <tr style="font-size:12px">
+            <td>Tax code: 03-10891532</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td align="center">
+                <div style="font-weight:bolder; font-size:30px">
+                    BIÊN NHẬN - RECEIPT
+                </div>
+                <div style="font-weight:bold">
+                    Ngày (date): @DateTime.Now.ToString("dd/MM/yyy")
+                </div>
+            </td>
+            <td>Số (Registration No.): <b>@Model.Id</b></td>
+        </tr>
+        <tr>
+
+            <td colspan="2">
+                <span>Nhận của công ty (Company):</span>
+                <span>Khách lẽ (ONSITE)</span>
+            </td>
+        </tr>
+        <tr>
+            @*<td>Họ và tên: (Fullname)</td>
+                <td>@Model.firstname</td>*@
+            <td>
+
+                <span>Họ và tên (Full name): </span>
+                <span><b>@Model.Firstname</b></span>
+            </td>
+
+            <td>
+                <span>Số khách (Pax): </span>
+                @if (@Model.Mop.Length >= 14)
+                {
+                    <span>1 HTTT (MOP): @Model.Mop.Substring(0, 14)</span>
+                }
+                else
+                {
+                    <span>1 HTTT (MOP): @Model.Mop</span>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Số tiền (Amount): @Model.Amount
+            </td>
+            <td>
+                @*Loại tiền (Currency)*@
+                <table>
+                    <tr>
+                        <td>
+                            <span>Loại tiền (Currency):</span>
+                            <span>@Model.Currency abcd</span> -
+                        </td>
+                        <td>
+                            <span>Tỷ giá (Rate): </span>
+                            <span>@Model.Rate abcd</span>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Diễn giải: (Description): @Model.Descript
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">Ghi chú (Note):@Model.Dfno</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Số tiền bằng chữ (Amount in word):&nbsp; <b>@ViewBag.AmountToString</b>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><b><i> (Xin vui lòng xuất trình biên nhận này khi thanh toán - please present this when setting the bill)</i></b></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <table>
+                    <tr>
+                        <td style="font-weight:bold" align="center" width="300px">
+                            <div>Khách hàng</div>
+                            <div>Clien's signature</div>
+                            <br /><br /><br />
+                        </td>
+                        <td>
+                            <table>
+                                <tr style="font-weight:bold">
+                                    <td align="center" width="300px">
+                                        <div>Thâu ngân</div>
+                                        <div>Cashier</div>
+                                        <br /><br /><br />
+                                    </td>
+                                    <td align="center" width="300px">
+                                        <div>Người lập</div>
+                                        <div>Issuer</div>
+                                        <br /><br /><br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

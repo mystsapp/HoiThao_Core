@@ -6,7 +6,7 @@
 
 @{
     ViewData["Title"] = "Asean";
-
+    
 }
 
 @section Scripts{
@@ -41,7 +41,7 @@
 
             <div class="input-group-append">
                 <button type="button" id="btnSearch" class="btn btn-primary"><i class="fa fa-search-dollar"></i></button>
-                <a asp-action="Create" id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-circle"></i></a>
+                <a asp-route-request="@ViewBag.request" asp-action="Create" id="btnAddNew" class="btn btn-success"><i class="fa fa-plus-circle"></i></a>
             </div>
         </div>
     </div>
@@ -99,17 +99,17 @@
 
                             <td>
                                 <div class="btn-group">
-                                    <a class="btn btn-outline btn-primary btn-sm btn-edit" asp-action="Edit" asp-route-id="@item.K" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-outline btn-danger btn-sm btn-delete" asp-action="Delete" asp-route-id="@item.K" title="Delete"><i class="fa fa-trash"></i></a>@*<i class="fa fa-trash" aria-hidden="true"></i>*@
+                                    <a class="btn btn-outline btn-primary btn-sm btn-edit" asp-action="Edit" asp-route-request="@ViewBag.request" asp-route-id="@item.K" title="Edit"><i class="fa fa-edit"></i></a>
+                                    <button type="button" class="btn btn-outline btn-danger btn-sm btn-delete" data-k="@item.K" title="Delete"><i class="fa fa-trash"></i></button>@*<i class="fa fa-trash" aria-hidden="true"></i>*@
                                     <a class="btn btn-outline btn-dark btn-sm btn-PrintReceipt" asp-action="PrintReceipt" asp-route-id="@item.K" title="Print receipt"><i class="fas fa-receipt"></i></a>
-                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintVAT" asp-action="PrintVAT" asp-route-id="@item.K" title="Print VAT"><i class="fas fa-print"></i></a>
-                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintBadge" asp-action="PrintBadge" asp-route-id="@item.K" title="Print Badge"><i class="fas fa-id-badge"></i></a>
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintVAT" asp-action="PrintVAT" asp-route-aseanId="@item.K" title="Print VAT"><i class="fas fa-print"></i></a>
+                                    <button type="button" class="btn btn-outline btn-dark btn-sm btn-PrintBadge" data-k="@item.K" title="Print Badge"><i class="fas fa-id-badge"></i></button>
                                     <a class="btn btn-outline btn-dark btn-sm btn-PrintCertificate" asp-action="PrintCertificate" asp-route-id="@item.K" title="Print Certificate"><i class="fas fa-address-card"></i></a>
                                 </div>
                             </td>
 
                             <td>
-                                @if (item.Invited.HasValue.Equals(true))
+                                @if (item.Invited.ToString().ToLower() == "true")
                                 {
                                     <span class="badge badge-success">true</span>
                                 }
@@ -119,7 +119,7 @@
                                 }
                             </td>
                             <td>
-                                @if (item.Speaker.HasValue.Equals(true))
+                                @if (item.Speaker.ToString().ToLower() == "true")
                                 {
                                     <span class="badge badge-success">true</span>
                                 }
@@ -177,8 +177,8 @@
                                 @Html.DisplayFor(modelItem => item.Grandtotal)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Checkin)
-                                <input class="form-control txtCheckin" data-kId="@item.K" type="text" value="@item.Checkin" />
+                                @*@Html.DisplayFor(modelItem => item.Checkin)*@
+                                <input class="form-control txtCheckin w-auto" data-kId="@item.K" type="text" value="@item.Checkin" />
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Descript)

@@ -1,0 +1,18 @@
+﻿@model HoiThao_Core.Data.Asean
+
+@{
+    Layout = null;
+    ViewData["Title"] = "PrintBadge";
+}
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div>@Model.Firstname</div>
+        <div>@Model.Id</div>
+        <div>@Model.Country</div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<a asp-action="CreatePDF" asp-route-link="@ViewBag.link" class="btn btn-primary">Print</a>

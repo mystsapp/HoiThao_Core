@@ -6,6 +6,7 @@
     "font-awesome-5": "~5.8.1",
     "bootbox": "~5.1.0",
     "jqueri-ui": "~1.12.1",
-    "jqueryui-timepicker-addon": "~1.6.3"
+    "jqueryui-timepicker-addon": "~1.6.3",
+    "jQuery.print": "~1.6.0"
   }
 }

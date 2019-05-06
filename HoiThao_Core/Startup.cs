@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using DinkToPdf;
+using DinkToPdf.Contracts;
 using HoiThao_Core.Data;
 using HoiThao_Core.Data.Repository;
+using HoiThao_Core.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +41,9 @@ namespace HoiThao_Core
             services.AddDbContext<hoinghiContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
+            var contextDll = new CustomAssemblyLoadContext();
+            contextDll.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
 
             services.AddTransient<IAccountRepository, AccountRepository>();
             services.AddTransient<IAseanRepository, AseanRepository>();

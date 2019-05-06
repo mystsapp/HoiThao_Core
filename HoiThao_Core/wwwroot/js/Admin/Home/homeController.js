@@ -60,6 +60,68 @@
             }
         });
 
+        $('.btn-delete').off('click').on('click', function () {
+            var id = $(this).data('k');
+            bootbox.confirm('Do you want to delete this item?', function (result) {
+                if (result) {
+                    $.ajax({
+                        url: '/Home/Delete',
+                        type: 'DELETE',
+                        data: { id: id },
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.status) {
+                                bootbox.alert('Delete success.');
+                                $('#refresh').submit();
+                            }
+                            else {
+                                bootbox.alert('Delete fail.');
+                            }
+
+                        }
+                    });
+                }
+            });
+        });
+
+        $('.btn-PrintReceipt').off('click').on('click', function () {
+            var id = $(this).data('kid');
+            window.open('/Home/PrintReceipt?id=' + id);
+
+        });
+
+        //$('.btn-PrintVAT').off('click').on('click', function () {
+        //    var id = $(this).data('kid');
+        //    window.open('/Home/PrintVAT?id=' + id);
+
+        //});
+        $('.btn-PrintBadge').off('click').on('click', function () {
+            var id = $(this).data('k');
+            //$.ajax({
+            //    url: '/Home/PrintBadge',
+            //    type: 'POST',
+            //    data: { id: id },
+            //    dataType: 'json',
+            //    success: function (response) {
+            //        console.log(response);
+            //        homeController.CreatePdf();
+            //    }
+            //});
+            $.get('/Home/PrintBadge', { id: id }, function (data) {
+                console.log(data);
+                homeController.CreatePdf();
+            });
+
+        });
+        
+    },
+
+    CreatePdf: function () {
+        $.ajax({
+            url: '/Home/CreatePDF',
+            type: 'GET',
+            dataType: 'json'
+        });
     }
 };
 homeController.init();
