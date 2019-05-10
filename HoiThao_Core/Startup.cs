@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.IO;
+using Wkhtmltopdf.NetCore;
 
 namespace HoiThao_Core
 {
@@ -36,6 +37,8 @@ namespace HoiThao_Core
             services.AddDbContext<hoinghiContext>(options =>
         options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            //services.AddScoped<HoiNghiDbContext>(_ => new HoiNghiDbContext(Configuration.GetConnectionString("DbConnection")));
+
             services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
             var contextDll = new CustomAssemblyLoadContext();
             contextDll.LoadUnmanagedLibrary(Path.Combine(Directory.GetCurrentDirectory(), "libwkhtmltox.dll"));
@@ -46,6 +49,11 @@ namespace HoiThao_Core
             //services.AddSingleton<IFileProvider>(
             //new PhysicalFileProvider(
             //    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
+            //services.AddScoped(provider =>
+            //{
+            //    //var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            //    return new HoiNghiDbContext("metadata=res://*/Context.HoiNghiDbContext.csdl|res://*/Context.HoiNghiDbContext.ssdl|res://*/Context.HoiNghiDbContext.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=192.168.4.198;initial catalog=hoinghi;user id=sa;password=TigerSts@2017;MultipleActiveResultSets=True;App=EntityFramework&quot;");
+            //});
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -55,6 +63,7 @@ namespace HoiThao_Core
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
             else
             {
@@ -70,6 +79,10 @@ namespace HoiThao_Core
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //Rotativa.AspNetCore.RotativaConfiguration.Setup(env);
+            Rotativa.AspNetCore.RotativaConfiguration.Setup(env);
         }
+        
     }
 }

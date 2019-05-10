@@ -14,7 +14,7 @@ namespace HoiThao_Core.Controllers
             _accountRepository = accountRepository;
         }
 
-        [Route("Accounts")]
+        //[Route("Accounts")]
         public IActionResult List(string searchString, int page = 1)
         {
             ViewData["CurrentFilter"] = searchString;

@@ -1,0 +1,42 @@
+﻿<!-- Modal -->
+<div id="hotelModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Choose hotel</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmHotel" action="/Report/ExportHotel" method="post" enctype="multipart/form-data">
+                    <div class="row">
+
+                        <div class="form-group">
+                            <div class="control-label col-md-1">Hotel:</div>
+                            <div class="col-md-4">
+                                <select class="form-control" id="ddlHotel">
+                                    <option value="">--Chọn giới tính--</option>
+                                    <option value="Users">Users</option>
+                                </select>
+                                <input id="hidHotel" type="hidden" name="hotel" />
+                            </div>
+
+                            <div class="col-md-7">
+                                <input type="submit" value="Report" id="btnReport" class="btn btn-primary" />
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="submit" class="btn btn-primary" id="btnSave"><i class="fa fa-save"></i> Lưu</button>*@
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-power-off"></i></button>
+            </div>
+        </div>
+
+    </div>
+</div>

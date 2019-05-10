@@ -7,44 +7,98 @@
 
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link href="~/lib/bootswatch/dist/united/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/lib/font-awesome-5/css/all.css" rel="stylesheet" />
     </environment>
+
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" />
-        <link href="~/lib/font-awesome-5/css/all.css" rel="stylesheet" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 badge-info">
-            <div class="container " >
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">HoiThao_Core</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1 ">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Accounts" asp-action="List">Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ImportExcel">Import Excel</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+        @*<nav class="navbar navbar-expand-md navbar-dark bg-primary">
+                <div class="container ">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"> <img src="~/Image/logo-color-big.png" /></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <ul class="navbar-nav flex-grow-1 ">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="List">Account</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="ImportExcel">Import Excel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </nav>*@
+        @* /////////////////////////////// *@
+        <nav class="navbar navbar-expand-md navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">
+                <img src="~/Image/logo-color-big.png" />
+            </a>
+            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse collapse" id="navbarsExampleDefault" style="">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Accounts" asp-action="List">Account</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reports</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
+
+                            <a class="dropdown-item" href="/Report/ConferenceReport">Conference</a>
+                            <a class="dropdown-item" href="/Report/WorkshopReport">Workshop</a>
+                            <a class="dropdown-item" href="/Report/ConferenceGroupByCountry">Conference group by country</a>
+                            <span role="separator" class="divider" />
+                            <a class="dropdown-item" href="/Report/InvitedGuests">Invited guests</a>
+                            <hr />
+                            <a class="dropdown-item" href="/Report/Received">Received payment</a>
+                            <a class="dropdown-item" href="/Report/PickupAtTheAirport">Pickup at the airport</a>
+                            <a class="dropdown-item" href="/Report/SeeOffAtTheAirport">See off at the airport</a>
+                            <a class="dropdown-item" href="/Report/BuyAirTicket">Buy air ticket</a>
+
+                            <a class="dropdown-item" href="/Report/Tour">Tour</a>
+                            <hr />
+
+
+                            <a class="dropdown-item" href="#" id="HotelList" class="dropdown-toggle" data-toggle="dropdown">Hotel</a>
+
+                            <hr />
+                            <a class="dropdown-item" href="/Report/CheckinList">Checkin list</a>
+                            <a class="dropdown-item" href="/Report/VatBill">VAT bill</a>
+                            <a class="dropdown-item" href="/Report/OnSiteList">On site list</a>
+                            <a class="dropdown-item" href="/Report/Speaker">Speaker</a>
+                        </div>
+                    </li>
+                </ul>
+
             </div>
         </nav>
+        @* /////////////////////////////// *@
+        <br />
     </header>
     <div class="container">
         @*<partial name="_CookieConsentPartial" />*@
@@ -87,6 +141,8 @@
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/AlertBox.js"></script>
+    <script src="~/js/Admin/Layout/layoutController.js"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+<partial name="_HotelModal.cshtml" />

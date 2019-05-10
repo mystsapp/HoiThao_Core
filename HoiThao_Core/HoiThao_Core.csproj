@@ -1,9 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <!--<TargetFramework>net471</TargetFramework>-->
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    
   </PropertyGroup>
 
 
@@ -11,12 +13,17 @@
     <PackageReference Include="DinkToPdf" Version="1.0.8" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.9.1" />
     <PackageReference Include="DotNetCore.NPOI" Version="1.2.1" />
+    <PackageReference Include="EntityFramework" Version="6.2.0" />
     <PackageReference Include="EPPlus.Core" Version="1.5.4" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.2" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.Office.Interop.Excel" Version="15.0.4795.1000" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
+    <PackageReference Include="Wkhtmltopdf.NetCore" Version="1.0.6" />
     <PackageReference Include="X.PagedList.Mvc.Core" Version="7.6.0" />
   </ItemGroup>
 
@@ -34,7 +41,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
-    <ProjectReference Include="..\Helps\Helps.csproj" />
+    <ProjectReference Include="..\Rotativa.AspNetCore\Rotativa.AspNetCore.csproj" />
   </ItemGroup>
 
 

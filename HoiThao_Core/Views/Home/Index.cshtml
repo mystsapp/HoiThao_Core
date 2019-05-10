@@ -103,7 +103,7 @@
                                     <button type="button" class="btn btn-outline btn-danger btn-sm btn-delete" data-k="@item.K" title="Delete"><i class="fa fa-trash"></i></button>@*<i class="fa fa-trash" aria-hidden="true"></i>*@
                                     <a class="btn btn-outline btn-dark btn-sm btn-PrintReceipt" asp-action="PrintReceipt" asp-route-id="@item.K" title="Print receipt"><i class="fas fa-receipt"></i></a>
                                     <a class="btn btn-outline btn-dark btn-sm btn-PrintVAT" asp-action="PrintVAT" asp-route-aseanId="@item.K" title="Print VAT"><i class="fas fa-print"></i></a>
-                                    <button type="button" class="btn btn-outline btn-dark btn-sm btn-PrintBadge" data-k="@item.K" title="Print Badge"><i class="fas fa-id-badge"></i></button>
+                                    <a class="btn btn-outline btn-dark btn-sm btn-PrintBadge" asp-action="PrintBadge" asp-route-id="@item.K" title="Print Badge"><i class="fas fa-id-badge"></i></a>
                                     <a class="btn btn-outline btn-dark btn-sm btn-PrintCertificate" asp-action="PrintCertificate" asp-route-id="@item.K" title="Print Certificate"><i class="fas fa-address-card"></i></a>
                                 </div>
                             </td>

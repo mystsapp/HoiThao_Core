@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using OfficeOpenXml;
+using Rotativa.AspNetCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -388,13 +390,6 @@ namespace HoiThao_Core.Controllers
             return View(aseanM);
         }
 
-        public IActionResult PrintBadge(int id)
-        {
-            ViewBag.link = UriHelper.GetDisplayUrl(Request);
-            var aseanList = _aseanRepository.GetById(id);
-
-            return View(aseanList);
-        }
 
         [HttpGet]
         public IActionResult CreatePDF()
@@ -434,5 +429,44 @@ namespace HoiThao_Core.Controllers
             //return File(file, "application/pdf", "EmployeeReport.pdf"); //USE THIS RETURN STATEMENT TO DOWNLOAD GENERATED PDF DOCUMENT
             return File(file, "application/pdf");
         }
+
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+            //var model = new TestModel { Name = "Giorgio" };
+            return new ViewAsPdf(null, ViewData);
+        }
+
+        public IActionResult PrintBadge(int id)
+        {
+            var asean = _aseanRepository.GetById(id);
+            return new ViewAsPdf(asean, null);
+        }
+
+        public IActionResult PrintCertificate(int id)
+        {
+            var asean = _aseanRepository.GetById(id);
+            return new ViewAsPdf(asean, null);
+        }
+
+        public JsonResult GetAllHotel()
+        {
+            bool statusAsean = false;
+            var aseanM = _aseanRepository.GetAllHotel();
+
+            //var settings = new JsonSerializerSettings() { ContractResolver = new NullToEmptyStringResolver() };
+            var str = JsonConvert.SerializeObject(aseanM);
+
+            if (aseanM != null)
+            {
+                statusAsean = true;
+            }
+            return Json(new
+            {
+                data = str,
+                status = statusAsean
+            });
+        }
+
     }
 }
