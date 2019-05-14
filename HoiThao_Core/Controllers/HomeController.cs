@@ -468,5 +468,21 @@ namespace HoiThao_Core.Controllers
             });
         }
 
+        [HttpGet]
+        public JsonResult GetDetail(int id)
+        {
+            bool statusAsean = false;
+            var aseanM = _aseanRepository.GetById(id);
+            if (aseanM != null)
+            {
+                statusAsean = true;
+            }
+            return Json(new
+            {
+                data = aseanM,
+                status = statusAsean
+            });
+        }
+
     }
 }
