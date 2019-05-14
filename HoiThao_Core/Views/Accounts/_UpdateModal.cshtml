@@ -1,0 +1,52 @@
+﻿<!-- Modal -->
+<div id="modalUpdate" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add/update item</h4>
+            </div>
+            <div class="modal-body">
+
+                <form id="frmSaveData" asp-controller="Home" asp-action="">
+                    <div class="row">
+
+                        <div class="form-group col-md-3">
+                            <label for="txtUsername">Username:</label>
+                            <input type="text" class="form-control" name="id" id="txtUsername">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="txtPassword">Password:</label>
+                            <input type="text" class="form-control" name="id" id="txtPassword">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="txtHoTen">Họ tên:</label>
+                            <input type="text" class="form-control" name="id" id="txtHoTen">
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label>Trạng thái:</label>
+                            <input type="checkbox" id="ckTrangThai">
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <input type="hidden" class="form-control" name="ngaytao" id="txtNgayTao">
+                        <input type="hidden" class="form-control" name="ngaycapnhat" id="txtNgayCapNhat">
+                        <input type="hidden" class="form-control" name="hidPass" id="txtHidPass">
+                        <input type="hidden" class="form-control" name="hidPass" id="txtHidID">
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnAdd"><i class="fa fa-save"></i> </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-power-off"></i></button>
+            </div>
+        </div>
+
+    </div>
+</div>

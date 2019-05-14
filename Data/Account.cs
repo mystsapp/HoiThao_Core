@@ -5,7 +5,7 @@ namespace Data
 {
     public partial class Account
     {
-        public int Id { get; set; }
+        public decimal Id { get; set; }
         public string Nhom { get; set; }
 
         [Required]

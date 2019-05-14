@@ -90,23 +90,9 @@
 
         });
 
-        //$('.btn-PrintVAT').off('click').on('click', function () {
-        //    var id = $(this).data('kid');
-        //    window.open('/Home/PrintVAT?id=' + id);
-
-        //});
         $('.btn-PrintBadge').off('click').on('click', function () {
             var id = $(this).data('k');
-            //$.ajax({
-            //    url: '/Home/PrintBadge',
-            //    type: 'POST',
-            //    data: { id: id },
-            //    dataType: 'json',
-            //    success: function (response) {
-            //        console.log(response);
-            //        homeController.CreatePdf();
-            //    }
-            //});
+
             $.get('/Home/PrintBadge', { id: id }, function (data) {
                 console.log(data);
                 homeController.CreatePdf();
@@ -114,14 +100,6 @@
 
         });
         
-    },
-
-    CreatePdf: function () {
-        $.ajax({
-            url: '/Home/CreatePDF',
-            type: 'GET',
-            dataType: 'json'
-        });
     }
 };
 homeController.init();

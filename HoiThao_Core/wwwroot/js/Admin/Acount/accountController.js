@@ -5,7 +5,7 @@
 
     registerEvent: function () {
         $('.btn-delete').off('click').on('click', function (e) {
-            e.preventDefault();
+            //e.preventDefault();
             var link = $(this).attr("href");
             bootbox.confirm({
                 title: "Delete Confirm?",

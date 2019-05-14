@@ -58,6 +58,8 @@ namespace Data.Repository
                 return null;
 
             // retrieve list from database/whereverand
+            
+
             var list = _context.Aseans.AsQueryable();
 
             if (!string.IsNullOrEmpty(option))
@@ -79,6 +81,7 @@ namespace Data.Repository
             if (!string.IsNullOrEmpty(searchString))
                 list = list.Where(a => a.Firstname.Contains(searchString) || a.Id.Contains(searchString));
 
+            var count = list.Count();
             // page the list
             const int pageSize = 5;
             var listPaged = list.ToPagedList(page ?? 1, pageSize);

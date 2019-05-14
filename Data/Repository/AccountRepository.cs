@@ -28,7 +28,7 @@ namespace Data.Repository
                 listAccount = listAccount.Where(a => a.Username.Contains(searchString) || a.Hoten.Contains(searchString));
 
             // page the list
-            const int pageSize = 1;
+            const int pageSize = 5;
             var listPaged = listAccount.ToPagedList(page ?? 1, pageSize);
 
             // return a 404 if user browses to pages beyond last page. special case first page if no items exist
