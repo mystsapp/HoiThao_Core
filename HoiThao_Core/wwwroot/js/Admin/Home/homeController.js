@@ -77,6 +77,9 @@ var homeController = {
                 $(this).addClass("hoverClass");
             }
 
+            var k = $(this).data('kid');
+            homeController.getDetail(k);
+
         });
 
         //$('#txtNameS').off('change keydown paste input').on('change keydown paste input', function () {
@@ -155,10 +158,11 @@ var homeController = {
         //    });
 
         //});
-        $('.aseanTr').off('click').on('click', function () {
-            var k = $(this).data('kid');
-            homeController.getDetail(k);
-        });
+
+        //$('.paymentTr').off('click').on('click', function () {
+        //    var k = $(this).data('kid');
+        //    homeController.getDetail(k);
+        //});
         
     },
     getDetail: function (id) {
@@ -214,6 +218,6 @@ var homeController = {
                 }
             }
         });
-    },
+    }
 };
 homeController.init();

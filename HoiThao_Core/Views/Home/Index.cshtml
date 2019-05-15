@@ -95,7 +95,7 @@
                         {
                             payment = "alert alert-danger";
                         }
-                        <tr class="paymentTr cursor-pointer aseanTr" data-kid="@item.K">
+                        <tr class="paymentTr cursor-pointer" data-kid="@item.K">
 
                             <td>
                                 <div class="btn-group">
@@ -221,249 +221,264 @@
 
 <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#services" >Services</a>
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#services">Services</a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#infomation">Infomation</a>
+    </li>
+
     <li class="nav-item">
         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#tourInfo">Tour info</a>
     </li>
 
 </ul>
-
+<br />
 <div class="tab-content">
     <div class="tab-pane active" id="services" role="tabpanel">
-        <div class="panel panel-sg">
-            <div class="panel-heading">
-                <h4>Services</h4>
+
+        <!-- Left col -->
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Hotel</h4>
             </div>
-            <div class="row panel-body">
-                <!-- Left col -->
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Hotel</h4>
-                        </div>
-                        <table class="table table-bordered tblHotel">
-                            <thead>
-                                <tr>
-                                    <th>Hotel</th>
-                                    <th>Check in</th>
-                                    <th>Check out</th>
-                                    <th>Price</th>
-                                    <th>Booking inf</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Hotel"></td>
-                                    <td id="HotelCheckin"></td>
-                                    <td id="HotelChceckout"></td>
-                                    <td id="HotelPrice"></td>
-                                    <td id="HotelBookingInf"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <hr />
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Transfer - Airport to hotel</h4>
-                        </div>
-
-                        <table class="table table-hover">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Vehicle</th>
-                                    <th>Pax</th>
-                                    <th>Arr</th>
-                                    <th>Flg no</th>
-                                    <th>Go with</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Vehicle"></td>
-                                    <td id="Pax"></td>
-                                    <td id="At"></td>
-                                    <td id="FlgNo"></td>
-                                    <td id="dikem"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Transfer - Hotel to airport</h4>
-                        </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Vehicle</th>
-                                    <th>Pax</th>
-                                    <th>Dep</th>
-                                    <th>Flg no</th>
-                                    <th>Go with</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Vehicle1"></td>
-                                    <td id="Pax1"></td>
-                                    <td id="Dep"></td>
-                                    <td id="FlgNo1"></td>
-                                    <td id="dikem1"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Air ticket - Y class</h4>
-                        </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Rout</th>
-                                    <th>Pax</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Ydate"></td>
-                                    <td id="Yrout"></td>
-                                    <td id="Ypax"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Air ticket - X class</h4>
-                        </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>Rout</th>
-                                    <th>Pax</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Xdate"></td>
-                                    <td id="Xrout"></td>
-                                    <td id="Xpax"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Private information</h4>
-                        </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Address</th>
-                                    <th>Department</th>
-                                    <th>Institution</th>
-                                    <th>Group</th>
-                                    <th>Note</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="Address"></td>
-                                    <td id="Department"></td>
-                                    <td id="Institution"></td>
-                                    <td id="Group"></td>
-                                    <td id="Note"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <hr />
-
-                <section class="col-lg-12 connectedSortable ui-sortable">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            @*<h4>Private information</h4>*@
-                        </div>
-
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Full delegate</th>
-                                    <th>Price</th>
-                                    <th>Resident</th>
-                                    <th>Price</th>
-                                    <th>Accompany person</th>
-                                    <th>Price</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td id="FullDelegate"></td>
-                                    <td id="FullPrice"></td>
-                                    <td id="Resident"></td>
-                                    <td id="ResidentPrice"></td>
-                                    <td id="AccompanyPerson"></td>
-                                    <td id="AccompanyPersonPrice"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-
+            <div class="card-body">
+                <table class="table table-bordered tblHotel">
+                    <thead>
+                        <tr>
+                            <th>Hotel</th>
+                            <th>Check in</th>
+                            <th>Check out</th>
+                            <th>Price</th>
+                            <th>Booking inf</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Hotel"></td>
+                            <td id="HotelCheckin"></td>
+                            <td id="HotelChceckout"></td>
+                            <td id="HotelPrice"></td>
+                            <td id="HotelBookingInf"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
+
+
+        <br />
+
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Transfer - Airport to hotel</h4>
+            </div>
+            <div class="card-body">
+                <table class="table table-bordered tblHotel">
+                    <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Pax</th>
+                            <th>Arr</th>
+                            <th>Flg no</th>
+                            <th>Go with</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Vehicle"></td>
+                            <td id="Pax"></td>
+                            <td id="At"></td>
+                            <td id="FlgNo"></td>
+                            <td id="dikem"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Transfer - Hotel to airport</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Vehicle</th>
+                            <th>Pax</th>
+                            <th>Dep</th>
+                            <th>Flg no</th>
+                            <th>Go with</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Vehicle1"></td>
+                            <td id="Pax1"></td>
+                            <td id="Dep"></td>
+                            <td id="FlgNo1"></td>
+                            <td id="dikem1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <br />
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Air ticket - Y class</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Rout</th>
+                            <th>Pax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Ydate"></td>
+                            <td id="Yrout"></td>
+                            <td id="Ypax"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <br />
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Air ticket - X class</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Rout</th>
+                            <th>Pax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Xdate"></td>
+                            <td id="Xrout"></td>
+                            <td id="Xpax"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+
+
     </div>
-    <div class="tab-pane" id="tourInfo" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="panel panel-sg">
-            <div class="panel-heading">
+
+    <div class="tab-pane fade" id="infomation" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                <h4>Private information</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Address</th>
+                            <th>Department</th>
+                            <th>Institution</th>
+                            <th>Group</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Address"></td>
+                            <td id="Department"></td>
+                            <td id="Institution"></td>
+                            <td id="Group"></td>
+                            <td id="Note"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <br />
+
+
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
+                @*<h4>Private information</h4>*@
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Full delegate</th>
+                            <th>Price</th>
+                            <th>Resident</th>
+                            <th>Price</th>
+                            <th>Accompany person</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="FullDelegate"></td>
+                            <td id="FullPrice"></td>
+                            <td id="Resident"></td>
+                            <td id="ResidentPrice"></td>
+                            <td id="AccompanyPerson"></td>
+                            <td id="AccompanyPersonPrice"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="tab-pane fade" id="tourInfo" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="card border-dark">
+            <div class="card-header bg-primary">
                 <h4>Tour info</h4>
             </div>
-            <div class="row panel-body">
+            <div class="row card-body">
                 <!-- Left col -->
-                <section class="col-lg-12 connectedSortable ui-sortable">
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Tour</th>
-                                <th>Date</th>
-                                <th>Pax</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td id="Tour"></td>
-                                <td id="TourDate"></td>
-                                <td id="TourPax"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </section>
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Tour</th>
+                            <th>Date</th>
+                            <th>Pax</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="Tour"></td>
+                            <td id="TourDate"></td>
+                            <td id="TourPax"></td>
+                        </tr>
+                    </tbody>
+                </table>
+
 
             </div>
         </div>
