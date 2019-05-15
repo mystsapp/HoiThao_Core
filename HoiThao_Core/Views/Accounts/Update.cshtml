@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Update";
+    var pass = Model.Password;
+
 }
 
 <h1>Update</h1>
@@ -39,7 +41,7 @@
 
             <div class="form-group btn-group">
                 <a class="btn btn-default" asp-controller="Accounts" asp-action="List">Return</a>
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Save" asp-route-pass="@pass" class="btn btn-primary" />
             </div>
         </form>
     </div>

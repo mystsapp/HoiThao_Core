@@ -51,6 +51,7 @@ namespace Data.Repository
 
         public void Update(T entity)
         {
+            
             _context.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             Save();
         }

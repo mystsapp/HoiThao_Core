@@ -2,6 +2,7 @@
 using Data.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 
 namespace HoiThao_Core.Controllers
 {
@@ -52,23 +53,23 @@ namespace HoiThao_Core.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(Account account)
+        public IActionResult Update(Account account, string pass)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(account);
-            }
-
-            var accountM = _accountRepository.GetById((int)(account.Id));
+            //var accountM = _accountRepository.GetById((int)(account.Id));
+            //var oldPass = accountM.Password;
 
             if (string.IsNullOrEmpty(account.Password))
-                account.Password = accountM.Password;
+                account.Password = pass;
 
             account.Ngaycapnhat = DateTime.Now;
 
-            _accountRepository.Update(account);
+            if (ModelState.IsValid)
+            {
+                _accountRepository.Update(account);
+                return RedirectToAction("List");
 
-            return RedirectToAction("List");
+            }
+            return View(account);
         }
 
         public IActionResult Delete(int id)

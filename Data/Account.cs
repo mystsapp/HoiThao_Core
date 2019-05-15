@@ -1,10 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Data
 {
     public partial class Account
     {
+        
         public decimal Id { get; set; }
         public string Nhom { get; set; }
 
