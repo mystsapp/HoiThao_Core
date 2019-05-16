@@ -6,7 +6,7 @@ namespace Data
 {
     public partial class Account
     {
-        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public decimal Id { get; set; }
         public string Nhom { get; set; }
 
